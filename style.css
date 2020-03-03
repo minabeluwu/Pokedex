@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+}
+
+body {
+  font-family: Arial;
+
+  /* background-color: #341677; */
+  background-color: #282f44;
+}
+
+.section {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokeball {
+  margin-bottom: 30px;
+  width: 80px;
+}
+
+.title {
+  font-size: 45px;
+  color: #ececec;
+
+  margin-bottom: 50px;
+}
+.parragraph {
+  color: #ececec;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+/* input*/
+
+#formid {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#pokemonid {
+  font-size: 18px;
+  padding: 0 20px 0 20px;
+
+  height: 5vh;
+  width: 100%;
+  margin-bottom: 50px;
+
+  border-radius: 50px;
+  border: none;
+  outline: none;
+
+  background-color: #ececec;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 3px 0px;
+}
+
+.botton {
+  border: 2px solid #f70776;
+  border-radius: 50px;
+
+  width: 50%;
+  height: 6vh;
+  margin-bottom: 50px;
+
+  font-size: 20px;
+  color: #f70776;
+
+  background: none;
+  outline: none;
+
+  transition: all 0.5s;
+}
+
+.botton:hover {
+  background: #f70776;
+  color: black;
+}
+
+#resultado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.titlePokemon {
+  color: #ececec;
+  font-size: 40px;
+}
+
+.pokeimg {
+  width: 300px;
+}

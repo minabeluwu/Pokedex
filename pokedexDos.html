@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Pokedex</title>
+  </head>
+  <body>
+    <div class="section">
+      <img src="pokeball.png" class="pokeball" />
+      <h1 class="title">Pokedex</h1>
+
+      <p class="parragraph">Escribe tu pokemon favorito!</p>
+
+      <form action="" id="formid">
+        <input type="text" id="pokemonid" />
+
+        <button type="submit" class="botton">Search</button>
+      </form>
+
+      <div id="resultado"></div>
+    </div>
+
+    <script>
+      const form = document.getElementById("formid");
+      const pokemonid = document.getElementById("pokemonid");
+      const resultado = document.getElementById("resultado");
+
+      form.addEventListener("submit", function(evento) {
+        evento.preventDefault();
+
+        let pokemonTitulo = document.createElement("h2");
+        pokemonTitulo.classList.add("titlePokemon");
+        let pokemonimage = document.createElement("img");
+        pokemonimage.classList.add("pokeimg");
+
+        async function buscarNombre(nombre) {
+          const pokemon = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${nombre}`
+          );
+
+          if (resultado.innerHTML !== "") {
+            resultado.innerHTML = "";
+          }
+
+          if (pokemon.ok) {
+            const pokemonData = await pokemon.json();
+
+            // pokemondata.sprites.front_default
+            const pokemonNombre = pokemonData.name;
+            const {
+              name,
+              sprites: { front_default }
+            } = pokemonData;
+
+            pokemonTitulo.innerHTML = name;
+            pokemonimage.src = front_default;
+
+            console.log(pokemonData);
+            console.log("todo bien");
+          } else {
+            console.log("error");
+          }
+
+          resultado.appendChild(pokemonTitulo);
+          resultado.appendChild(pokemonimage);
+        }
+        console.log(pokemonid.value);
+        buscarNombre(pokemonid.value);
+      });
+    </script>
+  </body>
+</html>
