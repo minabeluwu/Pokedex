@@ -32,11 +32,11 @@
     </div>
 
     <script>
-      const form = document.getElementById("formid");
-      const pokemonid = document.getElementById("pokemonid");
-      const resultado = document.getElementById("resultado");
+      const form = document.getElementById('formid')
+      const pokemonid = document.getElementById('pokemonid')
+      const resultado = document.getElementById('resultado')
 
-      const boton = document.getElementsByClassName("button")[0];
+      const boton = document.getElementsByClassName('button')[0]
 
       // let spinner = document.createElement("div");
       // spinner.classList.add("lds-ellipsis");
@@ -46,77 +46,86 @@
       //   <div></div>
       //   <div></div>`;
 
-      let loading = document.getElementsByClassName("spiner")[0];
+      let loading = document.getElementsByClassName('spiner')[0]
 
-      pokemonid.addEventListener("input", function(ev) {
-        let length = ev.target.value.length;
+      pokemonid.addEventListener('input', function(ev) {
+        let length = ev.target.value.length
         if (length > 0) {
-          boton.disabled = false;
+          boton.disabled = false
         } else {
-          boton.disabled = true;
+          boton.disabled = true
         }
 
-        console.log("");
-      });
+        console.log('')
+      })
 
-      form.addEventListener("submit", function(evento) {
-        evento.preventDefault();
+      function removerResultado() {
+        let pokemonTitulo = document.getElementsByClassName('titlePokemon')[0],
+          pokemonimage = document.getElementsByClassName('pokeimg')[0]
 
-        let pokemonTitulo = document.createElement("h2");
-        pokemonTitulo.classList.add("titlePokemon");
-        let pokemonimage = document.createElement("img");
-        pokemonimage.classList.add("pokeimg");
+        if (pokemonTitulo && pokemonimage) {
+          resultado.removeChild(pokemonTitulo)
+          resultado.removeChild(pokemonimage)
+        }
+      }
+
+      form.addEventListener('submit', function(evento) {
+        evento.preventDefault()
+        removerResultado()
+        let pokemonTitulo = document.createElement('h2')
+        pokemonTitulo.classList.add('titlePokemon')
+        let pokemonimage = document.createElement('img')
+        pokemonimage.classList.add('pokeimg')
 
         async function buscarNombre(nombre) {
           const pokemon = await fetch(
             `https://pokeapi.co/api/v2/pokemon/${nombre}`
-          );
+          )
 
-          loading.classList.toggle("ocultar");
-          console.log(pokemon);
+          loading.classList.toggle('ocultar')
 
           if (pokemon.ok && pokemon.status === 200) {
-            loading.classList.toggle("ocultar");
+            loading.classList.toggle('ocultar')
 
-            const pokemonData = await pokemon.json();
-            const pokemonNombre = pokemonData.name;
+            const pokemonData = await pokemon.json()
+            const pokemonNombre = pokemonData.name
             const {
               name,
-              sprites: { front_default }
-            } = pokemonData;
+              sprites: { front_default },
+            } = pokemonData
 
-            pokemonTitulo.innerHTML = name;
-            pokemonimage.src = front_default;
+            pokemonTitulo.innerHTML = name
+            pokemonimage.src = front_default
 
-            console.log(pokemonData);
-            console.log("todo bien");
+            console.log(pokemonData)
+            console.log('todo bien')
           } else {
-            console.log("error");
+            console.log('error')
 
-            let errorimg = document.createElement("img");
+            let errorimg = document.createElement('img')
             errorimg.setAttribute(
-              "src",
-              "https://image.flaticon.com/icons/svg/391/391116.svg"
-            );
-            document.getElementById("resultado").appendChild(errorimg);
-            document.querySelector(errorimg).style.width = "70px";
+              'src',
+              'https://image.flaticon.com/icons/svg/391/391116.svg'
+            )
+            document.getElementById('resultado').appendChild(errorimg)
+            document.querySelector(errorimg).style.width = '70px'
           }
 
-          resultado.appendChild(pokemonTitulo);
-          resultado.appendChild(pokemonimage);
+          resultado.appendChild(pokemonTitulo)
+          resultado.appendChild(pokemonimage)
 
           // resultado.onload = function() {};
 
-          boton.addEventListener("click", function(ev) {
-            pokeimg.classList.toggle("animation");
-          });
-          pokeimg.addEventListener("animationend", function(ev) {
-            pokeimg.classList.toggle("animation");
-          });
+          boton.addEventListener('click', function(ev) {
+            pokeimg.classList.toggle('animation')
+          })
+          pokeimg.addEventListener('animationend', function(ev) {
+            pokeimg.classList.toggle('animation')
+          })
         }
-        console.log(pokemonid.value);
-        buscarNombre(pokemonid.value);
-      });
+        console.log(pokemonid.value)
+        buscarNombre(pokemonid.value)
+      })
     </script>
   </body>
 </html>
